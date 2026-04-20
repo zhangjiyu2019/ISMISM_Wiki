@@ -17,10 +17,10 @@ export function getHomeCopy(lang: Language, totalIndexedEntries: number) {
       indexed: `${totalIndexedEntries} indexed entries`,
       language: "Language",
       matrixTitle: "4x4 Entry Grid",
-      matrixHelp: "Fixed dimensions: Field + Teleology; grid axes: Ontology (rows) x Epistemology (cols)",
+      matrixHelp: "Fixed dimensions: Ontology + Teleology; grid axes: Metaphysics (rows) x Epistemology (cols)",
       noEntry: "No entry",
-      field: "Field",
-      ontology: "Ontology",
+      field: "Ontology",
+      ontology: "Metaphysics",
       epistemology: "Epistemology",
       teleology: "Teleology",
       resetOrigin: "Reset Origin",
@@ -28,7 +28,7 @@ export function getHomeCopy(lang: Language, totalIndexedEntries: number) {
       viewXZ: "XZ",
       viewYZ: "YZ",
       rotateHint: "Drag cube to rotate, click a tile to open entry.",
-      availableField: "Available Field values",
+      availableField: "Available Ontology (first-axis) values",
       teleologyCard: "i-Dimension Teleology (Click to Enter)",
     };
   }

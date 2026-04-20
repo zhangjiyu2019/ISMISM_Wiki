@@ -14,7 +14,7 @@ function WhatIsIsmismPageContent() {
     () =>
       [
         {
-          title: lang === "en" ? "Field (1st digit)" : "场域论（第1格）",
+          title: lang === "en" ? "Ontology (1st digit)" : "场域论（第1格）",
           codes: ["1", "2", "3", "4"],
         },
         {
@@ -79,8 +79,8 @@ function WhatIsIsmismPageContent() {
                 Bilibili under the account Weimingzi. In Ismism, any doctrine, ideology, or worldview can be located by four coordinates, called the
                 four &quot;cells&quot;:
               </p>
-              <p>① Field: the ontological frame, the dimension in which meaning is posited.</p>
-              <p>② Ontology: what there is, the content of being.</p>
+              <p>① Ontology (场域论): the ontological frame, the dimension in which meaning is posited (the “field” axis in Chinese).</p>
+              <p>② Metaphysics (本体论): what there is, the content of being (the layer ordinary English often calls “ontology”).</p>
               <p>③ Epistemology: subjective access, phenomenology.</p>
               <p>④ Teleology: direction of movement, ethics.</p>
               <p>
@@ -91,7 +91,7 @@ function WhatIsIsmismPageContent() {
               <p>2 means split, antagonism, external inconsistency, conflictual motion, binary division.</p>
               <p>3 means compromise, mediation, centrality, a centralized downward motion—vertical fall.</p>
               <p>4 means void, impossibility, internal inconsistency, openness, a motion toward the unknown.</p>
-              <p>When filling the coordinates, the first cell (Field) is decisive. In that cell:</p>
+              <p>When filling the coordinates, the first cell (Ontology / 场域论) is decisive. In that cell:</p>
               <p>1: Subphysics / realism—non-reflective rule of field-order.</p>
               <p>2: Metaphysics—partial reflection, doubling of the field, conflict and opposition.</p>
               <p>3: Idealism—radical reflection, centralization of the field.</p>

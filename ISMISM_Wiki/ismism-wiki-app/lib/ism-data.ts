@@ -33,7 +33,8 @@ export const DIGIT_OPTIONS = [1, 2, 3, 4] as const;
 
 export const dimensionLabels: Record<Language, [string, string, string, string]> = {
   zh: ["场域论", "本体论", "认识论", "目的论"],
-  en: ["Field", "Ontology", "Epistemology", "Teleology"],
+  // Ismism English gloss: 场域论 → Ontology; 本体论 → Metaphysics (not standard Anglo “field / ontology” pairing).
+  en: ["Ontology", "Metaphysics", "Epistemology", "Teleology"],
 };
 
 const zhToEnExactMap: Record<string, string> = {
@@ -42,7 +43,8 @@ const zhToEnExactMap: Record<string, string> = {
   形而下学: "Subphysics",
   形而上学: "Metaphysics",
   观念论: "Idealism",
-  本体论: "Ontology",
+  场域论: "Ontology",
+  本体论: "Metaphysics",
   认识论: "Epistemology",
   目的论: "Teleology",
   存在主义: "Existentialism",
@@ -60,15 +62,19 @@ function fallbackTranslateZhLabel(text: string) {
   if (zhToEnExactMap[normalized]) return zhToEnExactMap[normalized];
 
   let translated = normalized;
-  translated = translated.replaceAll("场域", "Field");
-  translated = translated.replaceAll("本体", "Ontology");
+  translated = translated.replaceAll("形而上学", "Metaphysics");
+  translated = translated.replaceAll("形而下学", "Subphysics");
+  translated = translated.replaceAll("场域论", "Ontology");
+  translated = translated.replaceAll("本体论", "Metaphysics");
+  translated = translated.replaceAll("认识论", "Epistemology");
+  translated = translated.replaceAll("目的论", "Teleology");
+  translated = translated.replaceAll("场域", "Ontology");
+  translated = translated.replaceAll("本体", "Metaphysics");
   translated = translated.replaceAll("认识", "Epistemology");
   translated = translated.replaceAll("目的", "Teleology");
   translated = translated.replaceAll("实践", "Practice");
   translated = translated.replaceAll("观念", "Idea");
   translated = translated.replaceAll("实在", "Real");
-  translated = translated.replaceAll("形而上学", "Metaphysics");
-  translated = translated.replaceAll("形而下学", "Subphysics");
 
   return translated === normalized ? normalized : translated;
 }
