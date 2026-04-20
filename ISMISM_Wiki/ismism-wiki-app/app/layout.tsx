@@ -15,8 +15,8 @@ const notoSerifSC = Noto_Serif_SC({
 });
 
 export const metadata: Metadata = {
-  title: "Ismism Encyclopedia",
-  description: "Interactive encyclopedia for the Ismism philosophical system.",
+  title: "Ismism Wiki",
+  description: "Interactive wiki for the Ismism philosophical coordinate system.",
 };
 
 export default function RootLayout({

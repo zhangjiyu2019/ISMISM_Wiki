@@ -1,4 +1,5 @@
 import indexData from "@/app/data/ism-index.json";
+import zhTitleEn from "@/lib/ism-title-en.json";
 
 export type Language = "zh" | "en";
 
@@ -44,6 +45,13 @@ const zhToEnExactMap: Record<string, string> = {
   本体论: "Ontology",
   认识论: "Epistemology",
   目的论: "Teleology",
+  存在主义: "Existentialism",
+  结构主义: "Structuralism",
+  后结构主义: "Post-structuralism",
+  符号学: "Semiotics",
+  解释学: "Hermeneutics",
+  列宁主义: "Leninism",
+  金融资本主义: "Financial capitalism",
 };
 
 function fallbackTranslateZhLabel(text: string) {
@@ -61,22 +69,30 @@ function fallbackTranslateZhLabel(text: string) {
   translated = translated.replaceAll("实在", "Real");
   translated = translated.replaceAll("形而上学", "Metaphysics");
   translated = translated.replaceAll("形而下学", "Subphysics");
-  translated = translated.replaceAll("主义", "ism");
-  translated = translated.replaceAll("论", "Theory");
 
   return translated === normalized ? normalized : translated;
 }
 
+const zhTitleEnMap = zhTitleEn as Record<string, string>;
+
 export function splitBilingual(text: string) {
   const normalized = text.trim();
-  const match = normalized.match(/^(.*?)（(.*?)）$/);
-  if (!match) {
-    return { zh: normalized, en: fallbackTranslateZhLabel(normalized) };
+  const fullWidth = normalized.match(/^(.*?)（([^）]+)）$/);
+  if (fullWidth) {
+    return { zh: fullWidth[1].trim(), en: fullWidth[2].trim() };
   }
-  return {
-    zh: match[1].trim(),
-    en: match[2].trim(),
-  };
+  const halfWidth = normalized.match(/^(.*)\(([^)]+)\)\s*$/);
+  if (halfWidth && /[\u4e00-\u9fff]/.test(halfWidth[1]) && /[A-Za-z]/.test(halfWidth[2])) {
+    return { zh: halfWidth[1].trim(), en: halfWidth[2].trim() };
+  }
+  const mapped = zhTitleEnMap[normalized];
+  if (mapped) {
+    return { zh: normalized, en: mapped };
+  }
+  if (!/[\u4e00-\u9fff]/.test(normalized)) {
+    return { zh: normalized, en: normalized };
+  }
+  return { zh: normalized, en: fallbackTranslateZhLabel(normalized) };
 }
 
 export function getLocalizedLabel(text: string, lang: Language) {

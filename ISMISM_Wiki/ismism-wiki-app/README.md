@@ -1,6 +1,6 @@
 # Ismism Wiki App
 
-Interactive Ismism encyclopedia built with Next.js App Router.
+Interactive Ismism wiki built with Next.js App Router.
 
 ## What this app does
 

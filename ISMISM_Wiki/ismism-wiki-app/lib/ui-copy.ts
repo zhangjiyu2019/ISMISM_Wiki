@@ -3,7 +3,7 @@ import { type Language } from "@/lib/ism-data";
 export function getHomeCopy(lang: Language, totalIndexedEntries: number) {
   if (lang === "en") {
     return {
-      title: "Ismism Encyclopedia",
+      title: "Ismism Wiki",
       subtitle: "Philosophical Coordinate Navigator",
       introTitle: "Overview",
       introText:
@@ -34,7 +34,7 @@ export function getHomeCopy(lang: Language, totalIndexedEntries: number) {
   }
 
   return {
-    title: "主义主义百科",
+    title: "主义主义维基",
     subtitle: "哲学坐标导航系统",
     introTitle: "总体介绍",
     introText:
