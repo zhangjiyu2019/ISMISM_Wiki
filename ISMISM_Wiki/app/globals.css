@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+:root {
+  --background: #080a10;
+  --foreground: #ecf1ff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), "Segoe UI", Arial, sans-serif;
+}
+
+.reader-pane {
+  font-family: var(--font-noto-serif-sc), "Songti SC", serif;
+  line-height: 1.85;
+}
+
+.reader-pane h1,
+.reader-pane h2,
+.reader-pane h3,
+.reader-pane h4 {
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.reader-pane p,
+.reader-pane ul,
+.reader-pane ol,
+.reader-pane table,
+.reader-pane blockquote {
+  margin-bottom: 1em;
+}
+
+.reader-pane table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.reader-pane th,
+.reader-pane td {
+  border: 1px solid rgb(63 63 70 / 70%);
+  padding: 0.4rem 0.6rem;
+}
+
+.reader-pane code {
+  background: rgb(39 39 42 / 80%);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.3rem;
+}
+
+.reader-pane pre {
+  background: rgb(24 24 27 / 90%);
+  padding: 0.9rem;
+  border-radius: 0.6rem;
+  overflow: auto;
+}
+
+.reader-pane blockquote {
+  border-left: 3px solid rgb(34 211 238 / 70%);
+  padding-left: 0.8rem;
+  color: rgb(212 212 216);
+}
+
+.cube-wrap {
+  perspective: 900px;
+}
+
+.cube {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  transform-style: preserve-3d;
+  transition: transform 220ms ease-out;
+}
+
+.face {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  display: flex;
+  border: 1px solid rgb(255 255 255 / 18%);
+  background: rgb(8 47 73 / 75%);
+  box-shadow: inset 0 0 30px rgb(6 182 212 / 18%);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.cube-face-grid {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 0.3rem;
+}
+
+.cube-front-cell {
+  border-radius: 0.35rem;
+  border: 1px solid rgb(255 255 255 / 18%);
+  padding: 0.24rem;
+  background: rgb(24 24 27 / 74%);
+}
+
+.cube-front-cell-active {
+  background: rgb(16 185 129 / 16%);
+}
+
+.cube-front-cell-active:hover {
+  background: rgb(16 185 129 / 28%);
+}
+
+.cube-front-cell-empty {
+  background: rgb(39 39 42 / 70%);
+}
+
+.face-grid {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.sticker {
+  border-radius: 6px;
+  border: 1px solid rgb(255 255 255 / 24%);
+  background: rgb(34 211 238 / 35%);
+}
+
+.face-field .sticker {
+  background: linear-gradient(145deg, rgb(6 182 212 / 85%), rgb(14 116 144 / 70%));
+}
+
+.face-ontology .sticker {
+  background: linear-gradient(145deg, rgb(99 102 241 / 85%), rgb(67 56 202 / 70%));
+}
+
+.face-epistemology .sticker {
+  background: linear-gradient(145deg, rgb(34 197 94 / 85%), rgb(21 128 61 / 70%));
+}
+
+.face-back .sticker,
+.face-left .sticker,
+.face-bottom .sticker {
+  background: linear-gradient(145deg, rgb(39 39 42 / 90%), rgb(24 24 27 / 80%));
+}
+
+.front {
+  transform: translateZ(120px);
+}
+.back {
+  transform: rotateY(180deg) translateZ(120px);
+}
+.right {
+  transform: rotateY(90deg) translateZ(120px);
+}
+.left {
+  transform: rotateY(-90deg) translateZ(120px);
+}
+.top {
+  transform: rotateX(90deg) translateZ(120px);
+}
+.bottom {
+  transform: rotateX(-90deg) translateZ(120px);
+}
