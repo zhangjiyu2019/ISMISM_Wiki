@@ -5,7 +5,7 @@
   "scripts": {
     "index-content": "node scripts/build-ism-index.mjs",
     "dev": "npm run index-content && next dev",
-    "build": "npm run index-content && next build",
+    "build": "npm run index-content && next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
