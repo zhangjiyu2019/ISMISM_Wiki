@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   DIGIT_OPTIONS,
@@ -28,7 +28,7 @@ const graphDimensionColors = [
   { accent: "rgb(250 204 21 / 0.95)", soft: "rgb(250 204 21 / 0.35)" },
 ] as const;
 
-export default function StepSelectorPage() {
+function StepSelectorPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const lang = parseLanguage(searchParams.get("lang"));
@@ -49,6 +49,7 @@ export default function StepSelectorPage() {
           layered: "Coordinate graph",
           mapping: "Ideology mapping",
           noEntry: "No exact entry for this coordinate",
+          back: "Go back",
         }
       : {
           title: "分层导航",
@@ -56,6 +57,7 @@ export default function StepSelectorPage() {
           layered: "坐标网络图",
           mapping: "意识形态对应",
           noEntry: "该坐标没有精确词条",
+          back: "返回",
         };
 
   const optionsByDimension = useMemo(
@@ -117,7 +119,11 @@ export default function StepSelectorPage() {
         number | null,
         number | null,
       ];
-      next[index] = value;
+      if (index === 0) {
+        if (value !== null) next[0] = value;
+      } else {
+        next[index] = value;
+      }
       if (index <= 1 && value === null) {
         next[2] = null;
         next[3] = null;
@@ -304,5 +310,21 @@ export default function StepSelectorPage() {
 
       </section>
     </main>
+  );
+}
+
+export default function StepSelectorPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-[var(--background)] px-6 py-8 text-[var(--foreground)]">
+          <div className="mx-auto max-w-5xl animate-pulse rounded-none border border-white/10 bg-black/40 p-6 text-sm text-zinc-500">
+            Loading…
+          </div>
+        </main>
+      }
+    >
+      <StepSelectorPageContent />
+    </Suspense>
   );
 }

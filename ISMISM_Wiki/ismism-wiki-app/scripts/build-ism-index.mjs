@@ -149,11 +149,24 @@ function appendSiteSupplement(markdown, siteEntry) {
 }
 
 async function main() {
+  // For hosted deploys: skip re-indexing when `app/data/ism-index.json` is already committed.
+  if (process.env.ISMISM_SKIP_INDEX === "1") {
+    try {
+      await fs.access(outputFile);
+      console.log(`[build-ism-index] ISMISM_SKIP_INDEX=1: using existing ${outputFile}`);
+      return;
+    } catch {
+      throw new Error(
+        `ISMISM_SKIP_INDEX=1 but ${outputFile} is missing. Commit ism-index.json or run indexing with a valid ISMISM_SOURCE_DIR.`,
+      );
+    }
+  }
+
   try {
     await fs.access(sourceDir);
   } catch {
     throw new Error(
-      `Source directory "${sourceDir}" does not exist. Set ISMISM_SOURCE_DIR to your markdown root.`,
+      `Source directory "${sourceDir}" does not exist. Set ISMISM_SOURCE_DIR to your markdown root, or set ISMISM_SKIP_INDEX=1 if ism-index.json is already present.`,
     );
   }
 

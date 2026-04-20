@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getLocalizedLabel, ismData, parseLanguage } from "@/lib/ism-data";
 
-export default function WhatIsIsmismPage() {
+function WhatIsIsmismPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const lang = parseLanguage(searchParams.get("lang"));
@@ -122,5 +122,21 @@ export default function WhatIsIsmismPage() {
         </section>
       </section>
     </main>
+  );
+}
+
+export default function WhatIsIsmismPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-[var(--background)] px-6 py-8 text-[var(--foreground)]">
+          <div className="mx-auto max-w-4xl animate-pulse rounded-none border border-white/10 bg-black/40 p-6 text-sm text-zinc-500">
+            Loading…
+          </div>
+        </main>
+      }
+    >
+      <WhatIsIsmismPageContent />
+    </Suspense>
   );
 }

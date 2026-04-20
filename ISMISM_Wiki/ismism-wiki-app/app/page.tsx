@@ -244,8 +244,8 @@ export default function Home() {
       const endY = centerY - rotated.y * scale * perspective;
       const labelOffsetX = rotated.x >= 0 ? 4 : -4;
       const labelOffsetY = rotated.y >= 0 ? -3 : 3;
-      const defaultAnchor = rotated.x >= 0 ? "start" : "end";
-      const labelAnchor = item.key === "i" ? "end" : defaultAnchor;
+      const defaultAnchor: "start" | "end" = rotated.x >= 0 ? "start" : "end";
+      const labelAnchor: "start" | "end" = item.key === "i" ? "end" : defaultAnchor;
       const maxX = labelAnchor === "start" ? 72 : 96;
       const minX = item.key === "i" ? 44 : labelAnchor === "start" ? 4 : 28;
       return {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -53,7 +53,7 @@ type EntryTreeNode = {
   children: EntryTreeNode[];
 };
 
-export default function EntryPage() {
+function EntryPageContent() {
   const router = useRouter();
   const params = useParams<{ code: string }>();
   const searchParams = useSearchParams();
@@ -297,5 +297,21 @@ export default function EntryPage() {
         </aside>
       </div>
     </main>
+  );
+}
+
+export default function EntryPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-[var(--background)] px-6 py-8 text-[var(--foreground)]">
+          <div className="mx-auto max-w-5xl animate-pulse rounded-none border border-white/10 bg-black/40 p-6 text-sm text-zinc-500">
+            Loading…
+          </div>
+        </main>
+      }
+    >
+      <EntryPageContent />
+    </Suspense>
   );
 }

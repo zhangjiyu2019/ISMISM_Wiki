@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState, type ReactElement } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { READ_CODES_KEY, buildEntryMap, getLocalizedLabel, ismData, parseLanguage } from "@/lib/ism-data";
 import { getHomeCopy } from "@/lib/ui-copy";
 
 type ReadTreeNode = { code: string; children: ReadTreeNode[] };
 
-export default function ReadingRecordsPage() {
+function ReadingRecordsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const lang = parseLanguage(searchParams.get("lang"));
@@ -78,7 +78,7 @@ export default function ReadingRecordsPage() {
     return roots;
   }, []);
 
-  function renderReadTree(nodes: ReadTreeNode[], depth = 1): JSX.Element {
+  function renderReadTree(nodes: ReadTreeNode[], depth = 1): ReactElement {
     return (
       <ul className={`space-y-1 ${depth > 1 ? "mt-1 border-l border-white/8 pl-2" : ""}`}>
         {nodes.map((node) => {
@@ -140,5 +140,21 @@ export default function ReadingRecordsPage() {
         </section>
       </section>
     </main>
+  );
+}
+
+export default function ReadingRecordsPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-[var(--background)] px-6 py-8 text-[var(--foreground)]">
+          <div className="mx-auto max-w-5xl animate-pulse rounded-none border border-white/10 bg-black/40 p-6 text-sm text-zinc-500">
+            Loading…
+          </div>
+        </main>
+      }
+    >
+      <ReadingRecordsPageContent />
+    </Suspense>
   );
 }
