@@ -551,7 +551,7 @@ export default function Home() {
 
       <section className={`cube-shell ${menuOpen ? "cube-shell-shifted" : ""}`}>
         <div
-          className="cube-wrap flex min-h-[78vh] cursor-grab items-center justify-center active:cursor-grabbing"
+          className="cube-wrap flex cursor-grab items-center justify-center active:cursor-grabbing"
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}

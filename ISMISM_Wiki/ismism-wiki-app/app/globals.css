@@ -5,6 +5,10 @@
   --foreground: #ecf1ff;
 }
 
+html {
+  overscroll-behavior: none;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -16,6 +20,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), "Segoe UI", Arial, sans-serif;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
 
 * {
@@ -112,10 +117,15 @@ body {
 .cube-wrap {
   perspective: 560px;
   perspective-origin: 50% 42%;
+  /* Prevent the page from scrolling / rubber-banding while dragging the cube on touch devices */
+  touch-action: none;
+  overscroll-behavior: none;
+  min-height: 78vh;
 }
 
 .home-main {
   min-height: 100vh;
+  min-height: 100dvh;
   background:
     radial-gradient(circle at 60% 36%, rgb(255 255 255 / 5%) 0%, rgb(255 255 255 / 0%) 48%),
     #04060b;
@@ -127,6 +137,36 @@ body {
   margin-inline: auto;
   padding: 1.2rem 1rem 2.2rem;
   transition: transform 260ms ease;
+}
+
+/* Home (cube): lock viewport on narrow / touch layouts so drag is not eaten by page scroll */
+@media (max-width: 1024px) {
+  .home-main {
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cube-shell {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+
+  .cube-wrap {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .cube-stage {
+    min-height: 0;
+    flex: 1 1 auto;
+  }
 }
 
 .cube-shell-shifted {
@@ -241,6 +281,7 @@ body {
   gap: 0.3rem;
   padding: 0;
   pointer-events: auto;
+  touch-action: manipulation;
 }
 
 .axis-svg {
